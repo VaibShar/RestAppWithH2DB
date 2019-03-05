@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.restH2app.entity.Employee;
@@ -31,8 +33,9 @@ public class EmployeeRestController {
 		
 	}
 	
-	@GetMapping("/api/employees/{employeeId}")
-	public Employee getEmployee(@PathVariable(name = "employeeId") Long employeeId){		
+	@GetMapping("/api/employees/getById")
+	@ResponseBody
+	public Employee getEmployee(@RequestParam(name = "employeeId") Long employeeId){		
 		return service.getEmployee(employeeId);
 	}
 	
