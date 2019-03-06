@@ -1,11 +1,15 @@
 package com.cg.restH2app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.cg.restH2app.entity.Department;
 import com.cg.restH2app.entity.Employee;
 import com.cg.restH2app.repository.IEmployeeRepo;
 
@@ -18,8 +22,46 @@ public class ServiceImpl implements IService {
 	public void setEmployeeRepository(IEmployeeRepo employeeRepo) {
 		  this.employeeRepo = employeeRepo;
 		 }
-	
+/*
 	@Override
+	public void saveDepartment(Department department) {
+		employeeRepo.save(department);
+		for(Employee e: department.getEmployee())
+		{
+			System.out.println(e.getDept().getDepId());
+		}
+		
+	}*/
+	
+
+	
+
+	
+		
+		@Override
+	
+	public ResponseEntity<?> saveDepartment(Department department) {
+		
+		System.out.println("in service just before saving");
+		
+		return new ResponseEntity<>(employeeRepo.saveAndFlush(department),HttpStatus.CREATED);
+		
+	}
+@Override
+public List<Department> retrieveDepartment() {
+	List<Department> dep = employeeRepo.findAll();
+	
+	
+	return dep;
+}
+
+
+
+
+
+
+	
+	/*@Override
 	public List<Employee> retrieveEmployees() {
 		
 		List<Employee> employees = employeeRepo.findAll();
@@ -58,6 +100,9 @@ public class ServiceImpl implements IService {
 			emp.setSalary(emp.getSalary());
 			//employeeRepo.save(employee);
 
-	}
+	}*/
+	
+	
+	
 
 }
